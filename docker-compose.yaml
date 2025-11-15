@@ -13,5 +13,5 @@ services:
 
 networks:
   jwp_network:
-    external: 
-      name: jwp_network
+    name: jwp_network
+    external: true
