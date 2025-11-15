@@ -1,15 +1,15 @@
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
+      - "81:81"
     volumes:
-      - ./conf.d:/etc/nginx/conf.d:ro
-    networks:
-      - jwp_network
-    restart: unless-stopped
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
 
 networks:
   jwp_network:
