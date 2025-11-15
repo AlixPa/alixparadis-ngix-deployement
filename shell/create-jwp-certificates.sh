@@ -20,8 +20,9 @@ docker run --rm \
   --webroot -w /var/www/certbot \
   -d jwp.alixparadis.com
 
+docker compose stop nginx
 rm -rf certbot/conf
 mkdir certbot/conf/
 mv $TMP_FOLDER/* certbot/conf/
-docker exec nginx nginx -s reload
+docker compose up -d nginx
 docker compose up -d certbot
