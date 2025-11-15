@@ -6,9 +6,12 @@ openssl req -x509 -nodes -days 1 \
   -out certbot/conf/live/jwp.alixparadis.com/fullchain.pem \
   -subj "/CN=jwp.alixparadis.com"
 docker compose up -d nginx
+
+TMP_FOLDER=certbot/tmp
+mkdir $TMP_FOLDER
 docker run --rm \
   -v $(pwd)/certbot/www:/var/www/certbot \
-  -v $(pwd)/certbot/conf:/etc/letsencrypt \
+  -v $TMP_FOLDER:/etc/letsencrypt/conf/live/jwp.alixparadis.com \
   certbot/certbot certonly \
   --non-interactive \
   --agree-tos \
@@ -16,5 +19,7 @@ docker run --rm \
   --force-renewal \
   --webroot -w /var/www/certbot \
   -d jwp.alixparadis.com
+
+mv $TMP_FOLDER certbot/conf/live/jwp.alixparadis.com
 docker exec nginx nginx -s reload
 docker compose up -d certbot
