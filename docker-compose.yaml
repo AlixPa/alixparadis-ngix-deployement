@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   nginx:
     image: nginx:latest
@@ -12,3 +10,6 @@ services:
     networks:
       - jwp_network
     restart: unless-stopped
+
+networks:
+  - jwp_network
