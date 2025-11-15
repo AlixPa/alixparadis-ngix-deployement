@@ -12,4 +12,5 @@ services:
     restart: unless-stopped
 
 networks:
-  - jwp_network
+  jwp_network:
+    driver: bridge
