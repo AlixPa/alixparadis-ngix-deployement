@@ -11,7 +11,7 @@ TMP_FOLDER=certbot/tmp
 mkdir $TMP_FOLDER
 docker run --rm \
   -v $(pwd)/certbot/www:/var/www/certbot \
-  -v $TMP_FOLDER:/etc/letsencrypt \
+  -v ./$TMP_FOLDER:/etc/letsencrypt \
   certbot/certbot certonly \
   --non-interactive \
   --agree-tos \
