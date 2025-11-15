@@ -21,6 +21,7 @@ docker run --rm \
   -d jwp.alixparadis.com
 
 rm -rf certbot/conf
+mkdir certbot/conf/
 mv $TMP_FOLDER/* certbot/conf/
 docker exec nginx nginx -s reload
 docker compose up -d certbot
