@@ -13,6 +13,8 @@ docker run --rm \
   --non-interactive \
   --agree-tos \
   --register-unsafely-without-email \
+  --force-renewal \
   --webroot -w /var/www/certbot \
   -d jwp.alixparadis.com
 docker exec nginx nginx -s reload
+docker compose up -d certbot
