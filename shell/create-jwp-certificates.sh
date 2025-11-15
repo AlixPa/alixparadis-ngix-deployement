@@ -1,4 +1,5 @@
 #/!/bin/sh
+docker compose up -d nginx
 docker run --rm \
   -v $(pwd)/certbot/www:/var/www/certbot \
   -v $(pwd)/certbot/conf:/etc/letsencrypt \
