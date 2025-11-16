@@ -24,7 +24,6 @@ docker run --rm \
   --agree-tos \
   --register-unsafely-without-email \
   --force-renewal \
-  --staging \
   --webroot -w /var/www/certbot \
   -d jwp.alixparadis.com
 
