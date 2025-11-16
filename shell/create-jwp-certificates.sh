@@ -8,6 +8,11 @@ openssl req -x509 -nodes -days 1 \
   -subj "/CN=jwp.alixparadis.com"
 docker compose up -d nginx
 
+until docker exec nginx sh -c "nc -z localhost 80"; do
+  echo "nginx not running yet, waiting 1s"
+  sleep 1
+done
+
 TMP_FOLDER=certbot/tmp
 mkdir $TMP_FOLDER
 docker run --rm \
