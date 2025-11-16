@@ -7,9 +7,11 @@ openssl req -x509 -nodes -days 1 \
   -keyout certbot/conf/live/jwp.alixparadis.com/privkey.pem \
   -out certbot/conf/live/jwp.alixparadis.com/fullchain.pem \
   -subj "/CN=jwp.alixparadis.com"
-sleep 1
 docker compose up -d nginx
-docker compose wait nginx
+until nc -z localhost 80; do
+  echo "nginx not ready, waiting 1s"
+  sleep 1
+done
 
 TMP_FOLDER=certbot/tmp
 mkdir $TMP_FOLDER
