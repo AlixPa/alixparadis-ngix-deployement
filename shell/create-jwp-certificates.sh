@@ -7,6 +7,7 @@ openssl req -x509 -nodes -days 1 \
   -keyout certbot/conf/live/jwp.alixparadis.com/privkey.pem \
   -out certbot/conf/live/jwp.alixparadis.com/fullchain.pem \
   -subj "/CN=jwp.alixparadis.com"
+sleep 1
 docker compose up -d nginx
 docker compose wait nginx
 
