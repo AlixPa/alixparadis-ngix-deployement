@@ -1,4 +1,5 @@
 #/!/bin/sh
+rm -rf certbot
 mkdir -p certbot/conf/live/jwp.alixparadis.com
 openssl req -x509 -nodes -days 1 \
   -newkey rsa:2048 \
@@ -17,6 +18,7 @@ docker run --rm \
   --agree-tos \
   --register-unsafely-without-email \
   --force-renewal \
+  --staging \
   --webroot -w /var/www/certbot \
   -d jwp.alixparadis.com
 
