@@ -12,6 +12,12 @@ services:
     networks:
       - jwp_network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
 
   certbot:
     image: certbot/certbot
