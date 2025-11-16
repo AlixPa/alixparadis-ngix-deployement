@@ -1,4 +1,5 @@
 #/!/bin/sh
+docker compose stop
 rm -rf certbot
 mkdir -p certbot/conf/live/jwp.alixparadis.com
 openssl req -x509 -nodes -days 1 \
