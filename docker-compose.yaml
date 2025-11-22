@@ -10,7 +10,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     networks:
-      - jwp_network
+      - internal_network
     restart: unless-stopped
 
   certbot:
@@ -23,9 +23,9 @@ services:
       sh -c "trap exit TERM; while :; do sleep 12h & wait $${!}; certbot renew; done"
     restart: unless-stopped
     networks:
-      - jwp_network
+      - internal_network
 
 networks:
-  jwp_network:
-    name: jwp_network
+  internal_network:
+    name: internal_network
     external: true

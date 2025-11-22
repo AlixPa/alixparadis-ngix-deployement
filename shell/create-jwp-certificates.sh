@@ -1,12 +1,18 @@
 #/!/bin/sh
 docker compose stop
-rm -rf certbot
+mv certbot certbot_save
 mkdir -p certbot/conf/live/jwp.alixparadis.com
+mkdir -p certbot/conf/live/www.alixparadis.com
 openssl req -x509 -nodes -days 1 \
   -newkey rsa:2048 \
   -keyout certbot/conf/live/jwp.alixparadis.com/privkey.pem \
   -out certbot/conf/live/jwp.alixparadis.com/fullchain.pem \
   -subj "/CN=jwp.alixparadis.com"
+openssl req -x509 -nodes -days 1 \
+  -newkey rsa:2048 \
+  -keyout certbot/conf/live/www.alixparadis.com/privkey.pem \
+  -out certbot/conf/live/www.alixparadis.com/fullchain.pem \
+  -subj "/CN=www.alixparadis.com"
 sleep 1
 docker compose up -d nginx
 until nc -z localhost 80; do
@@ -25,7 +31,8 @@ docker run --rm \
   --register-unsafely-without-email \
   --force-renewal \
   --webroot -w /var/www/certbot \
-  -d jwp.alixparadis.com
+  -d jwp.alixparadis.com \
+  -d www.alixparadis.com
 
 docker compose stop nginx
 rm -rf certbot/conf
